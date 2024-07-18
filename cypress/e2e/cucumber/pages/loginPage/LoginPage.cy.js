@@ -37,10 +37,13 @@ class LoginPage {
   }
 
   login(username, password){
-    this.visitLoginPage()
-    this.enterUsernameAndPassword(username, password)
-    this.clickLoginButton()
-    this.verifyURL()
+    cy.session([username, password], ()=>{
+      this.visitLoginPage()
+      this.enterUsernameAndPassword(username, password)
+      this.clickLoginButton()
+      this.verifyURL()
+    })
+ 
   }
 
  }

@@ -10,6 +10,7 @@ Before(()=>{
         `${Cypress.env('USERNAME')}`,
         `${Cypress.env('PASSWORD')}`
     )
+    cy.visit('/inventory.html')
 })
 
 Given('I want to add a product to the cart', (datatable) => {

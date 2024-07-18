@@ -4,17 +4,34 @@ import product from '../../pages/productsPage/ProductsPage.cy';
 import cart from '../../pages/cartPage/CartPage.cy';
 import checkout from '../../pages/checkoutPage/CheckoutPage.cy';
 
+
 Before(()=>{
-    
-    product.addproductByIdToCart(4, 'Sauce Labs Backpack')
+
+    login.login(
+        `${Cypress.env('USERNAME')}`,
+        `${Cypress.env('PASSWORD')}`
+    )
+    cy.visit('/inventory.html')
+})
+
+Given('I want to add a product to the cart', (datatable) => {
+    datatable.hashes().forEach((element) => {
+        product.addproductByIdToCart(
+           element.productId,
+           element.name
+        )
+    })
+   
+})
+And('add product to cart', ()=> {
     cart.addProductToCart()
     cart.clickCartButton()
     cart.clickCheckoutButton()
-})
-
-Given('I added products to the cart', ()=> {
     checkout.checkStepOneURL()
 })
+
+
+   
 
 And('entered my name', ()=> {
     checkout.inputFirstName('joaquina')

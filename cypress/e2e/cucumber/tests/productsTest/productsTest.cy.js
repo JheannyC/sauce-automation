@@ -7,6 +7,7 @@ Given('I login with a valid username and password', () => {
         `${Cypress.env('USERNAME')}`,
         `${Cypress.env('PASSWORD')}`
     )
+    cy.visit('/inventory.html')
 })
 
 When('access the product page', () => {
