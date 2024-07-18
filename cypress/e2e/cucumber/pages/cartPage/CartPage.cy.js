@@ -1,79 +1,79 @@
-import element from "./element"
+import element from './element'
 
 class CartPage {
 
-    checkCart(){
+    checkCart() {
         cy.get(element.attr.cartIcon)
-        .should('be.visible')
-        .click()
+            .should('be.visible')
+            .click()
     }
 
-    addProductToCart (){
+    addProductToCart() {
         cy.get(element.attr.addToCart)
-        .should('contain.text', element.label.addToCart)
-        .click()
+            .should('contain.text', element.label.addToCart)
+            .click()
     }
-    removeProductFromCart (){
+    removeProductFromCart() {
         cy.get(element.attr.removeCartButton)
-        .should('contain.text', element.label.remove)
-        .click()
+            .should('contain.text', element.label.remove)
+            .click()
     }
 
-    clickBackButton(){
+    clickBackButton() {
         cy.get(element.attr.backButton)
-        .should('contain.text', 'Back')
-        .click()
+            .should('contain.text', 'Back')
+            .click()
     }
-    productsCounter(productQuantity){
+
+    productsCounter(productQuantity) {
         cy.get(element.attr.productsCounter)
-        .should('contain.text', productQuantity)
-       
+            .should('contain.text', productQuantity)
+
     }
 
-    clickCartButton(){
+    clickCartButton() {
         cy.get(element.attr.cartIconButton)
-        .click()
+            .click()
     }
 
-    clickCheckoutButton(){
+    clickCheckoutButton() {
         cy.get(element.attr.checkoutButton)
-        .should('contain.text', element.label.checkout)
-        .click()
+            .should('contain.text', element.label.checkout)
+            .click()
     }
 
-    checkCartProducts(){
+    checkCartProducts() {
 
-            cy.get('.cart_list').each(($id, index, $list) => {
-                    
-                cy.wrap($id).find('.inventory_item_name').each(($name) => {
-                    cy.wrap($name)
-                    .should('be.visible')
-                    .and('exist')
-                    .and('not.be.empty')
-                })
+        cy.get('.cart_list').each(($id, index, $list) => {
 
-                cy.wrap($id).find('.inventory_item_desc').each(($description) => {
-                    cy.wrap($description)
-                    .should('be.visible')
-                    .and('exist')
-                    .and('not.be.empty')
-                })
-
-                cy.wrap($id).find('.inventory_item_price').each(($price) => {
-                    cy.wrap($price)
+            cy.wrap($id).find('.inventory_item_name').each(($name) => {
+                cy.wrap($name)
                     .should('be.visible')
                     .and('exist')
                     .and('not.be.empty')
             })
-    
+
+            cy.wrap($id).find('.inventory_item_desc').each(($description) => {
+                cy.wrap($description)
+                    .should('be.visible')
+                    .and('exist')
+                    .and('not.be.empty')
+            })
+
+            cy.wrap($id).find('.inventory_item_price').each(($price) => {
+                cy.wrap($price)
+                    .should('be.visible')
+                    .and('exist')
+                    .and('not.be.empty')
+            })
+
         })
     }
 
-    checkCartURL(){
+    checkCartURL() {
         cy.url()
-        .should('include', element.route.cartUrl)
+            .should('include', element.route.cartUrl)
     }
-
 
 }
 

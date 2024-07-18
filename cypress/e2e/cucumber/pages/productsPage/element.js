@@ -1,7 +1,8 @@
 const element = {
+    
     /*
-        Use a pattern to register ids;
-        bug: burguerMenu is not working. Cypress can not identify.
+        fix: use a pattern to register ids;
+        bug: burguerMenu is not working. Cypress can not see visible.
     */
 
     attr: {
@@ -18,11 +19,13 @@ const element = {
         cartButton: '.btn_primary',
         productId1: '#item_1_title_link',
         productId2: '#item_2_title_link',
-        productNameDetail: '.btn_primary'
+        productNameDetail: '.btn_primary',
     },
 
+    route: {
+        inventory: '/inventory.html',
+    }
 
 }
-
 
 export default element

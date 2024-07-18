@@ -1,32 +1,29 @@
-Feature: User login
-
-  Background:Navigate to login page
+Feature: User Login
 
   Scenario: Login with valid username and password
-    Given Navigate to login page
-    When I entered valid username and password
-    And User click on login button
-    Then Validate the URL after login
-
+    Given I navigate to the login page
+    When I enter a valid username and password
+    And I click on the login button
+    Then I should be redirected to the inventory page
 
   Scenario: Login with valid username and invalid password
-    Given Navigate to login page
-    When I entered username and password
+    Given I navigate to the login page
+    When I enter the following credentials
       | email         | password |
-      | standard_user | sauce   |
-    And User click on login button
-    Then Validate the login error message
+      | standard_user | 34334    |
+    And I click on the login button
+    Then I should see an error message for invalid credentials
 
   Scenario: Login with invalid username and password
-    Given Navigate to login page
-    When I entered username and password
+    Given I navigate to the login page
+    When I enter the following credentials
       | email | password |
-      | 4545  | test    |
-    And User click on login button
-    Then Validate the login error message
+      | 4545  | test     |
+    And I click on the login button
+    Then I should see an error message for invalid credentials
 
-  Scenario: Login as locked user
-    Given Navigate to login page
+  Scenario: Login as a locked user
+    Given I navigate to the login page
     When I entered a locked username and password
-    And User click on login button
-    Then Validate the locked error message
+    And I click on the login button
+    Then I should see an error message indicating the user is locked

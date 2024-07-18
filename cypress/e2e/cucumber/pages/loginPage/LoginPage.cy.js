@@ -2,47 +2,49 @@ import element from "./element";
 
 class LoginPage {
 
-  visitLoginPage() {
-    cy.visit("/")
-  }
+    visitLoginPage() {
+        cy.visit("/")
+    }
 
-  enterUsernameAndPassword(username, password) {
-    cy.get(element.attr.username)
-    .should('have.attr', 'placeholder', element.placeholder.username)
-    .type(username);
+    enterUsernameAndPassword(username, password) {
+        cy.get(element.attr.username)
+            .should('have.attr', 'placeholder', element.placeholder.username)
+            .type(username);
 
-    cy.get(element.attr.password)
-    .should('have.attr', 'placeholder', element.placeholder.password)
-    .type(password);
-  }
+        cy.get(element.attr.password)
+            .should('have.attr', 'placeholder', element.placeholder.password)
+            .type(password);
+    }
 
-  clickLoginButton() {
-    cy.get(element.attr.loginButton)
-    .should('contain.value', element.placeholder.loginButton)
-    .click();
-  }
+    clickLoginButton() {
+        cy.get(element.attr.loginButton)
+            .should('contain.value', element.placeholder.loginButton)
+            .click();
+    }
 
-  verifyURL() {
-    cy.url().should('include', element.route.loggedUser)
-  }
+    checkInventoryURL() {
+        cy.url()
+            .should('include', element.route.inventory)
+    }
 
-  verifyLoginError() {
-    cy.get(element.attr.loginError)
-    .should('contain.text', element.message.loginError)
-  }
+    verifyLoginErrorMessage() {
+        cy.get(element.attr.loginError)
+            .should('contain.text', element.message.loginError)
+    }
 
-  verifyLockedError() {
-    cy.get(element.attr.loginError)
-    .should('contain.text', element.message.lockedUser)
-  }
+    ckeckLockedUserErrorMessage() {
+        cy.get(element.attr.loginError)
+            .should('contain.text', element.message.lockedUser)
+    }
 
-  login(username, password){
-    this.visitLoginPage()
-    this.enterUsernameAndPassword(username, password)
-    this.clickLoginButton()
-    this.verifyURL()
-  }
+    login(username, password) {
+        cy.session([username, password], () => {
+            this.visitLoginPage()
+            this.enterUsernameAndPassword(username, password)
+            this.clickLoginButton()
+            this.checkInventoryURL()
+        })
+    }
+}
 
- }
-
- export default new LoginPage();
+export default new LoginPage();

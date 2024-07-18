@@ -1,60 +1,60 @@
-Feature: Cart page
+Feature: Cart Page
 
-Scenario: adding a product to the cart
-    Given I want to add a product to the cart
-    | productId |           name       |
-    |   4       | Sauce Labs Backpack  |
-    And click on the add to cart button
-    When check the quantity of products
-        | productQuantity  |
-        |       1          |
-    Then go to cart list page
-    And check the list of added products
-
-Scenario: adding more than one product to the cart
+Scenario: Adding a product to the cart
     Given I want to add a product to the cart
         | productId |           name       |
-        |   4       | Sauce Labs Backpack  |
-        And click on the add to cart button
-        And click the back button
-        And I want to add another product to the cart
-        | productId    |           name       |
-        |   0          | Sauce Labs Bike Light|
-        And click on the add to cart button
-        When check the quantity of products
-            | productQuantity  |
-            |       2          |
-        Then go to cart list page
-        And check the list of added products
+        |    4      | Sauce Labs Backpack  |
+    And I click on the add to cart button
+    When I check the quantity of products
+        | productQuantity |
+        |        1        |
+    Then I go to the cart list page
+    And I check the list of added products
 
-Scenario: removing a product from the cart
+Scenario: Adding more than one product to the cart
     Given I want to add a product to the cart
         | productId |           name       |
-        |   4       | Sauce Labs Backpack  |
-        And click on the add to cart button
-        And click the back button
-        And I want to add another product to the cart
-        | productId    |           name       |
-        |   0          | Sauce Labs Bike Light|
-        And click on the add to cart button
-        When check the quantity of products
-            | productQuantity  |
-            |       2          |
-        And click in remove button
-        When check the quantity of products
-            | productQuantity  |
-            |       1          |
-        Then go to cart list page
-        And check the list of added products
+        |    4      | Sauce Labs Backpack  |
+    And I click on the add to cart button
+    And I click the back button
+    And I want to add another product to the cart
+        | productId |           name          |
+        |    0      | Sauce Labs Bike Light   |
+    And I click on the add to cart button
+    When I check the quantity of products
+        | productQuantity |
+        |        2        |
+    Then I go to the cart list page
+    And I check the list of added products
 
-Scenario: adding product and going to checkout screen
+Scenario: Removing a product from the cart
     Given I want to add a product to the cart
-    | productId |           name       |
-    |   4       | Sauce Labs Backpack  |
-    And click on the add to cart button
-    When check the quantity of products
-        | productQuantity  |
-        |       1          |
-    Then go to cart list page
-    And check the list of added products
-    And click in checkout button
+        | productId |           name       |
+        |    4      | Sauce Labs Backpack  |
+    And I click on the add to cart button
+    And I click the back button
+    And I want to add another product to the cart
+        | productId |           name          |
+        |    0      | Sauce Labs Bike Light   |
+    And I click on the add to cart button
+    When I check the quantity of products
+        | productQuantity |
+        |        2        |
+    And I click the remove button
+    When I check the quantity of products
+        | productQuantity |
+        |        1        |
+    Then I go to the cart list page
+    And I check the list of added products
+
+Scenario: Adding a product and going to the checkout screen
+    Given I want to add a product to the cart
+        | productId |           name       |
+        |    4      | Sauce Labs Backpack  |
+    And I click on the add to cart button
+    When I check the quantity of products
+        | productQuantity |
+        |        1        |
+    Then I go to the cart list page
+    And I check the list of added products
+    And I click the checkout button

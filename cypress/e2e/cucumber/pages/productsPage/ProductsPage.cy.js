@@ -1,40 +1,44 @@
-import element from "./element"
+import element from './element'
 
 class ProductsPage {
-    
-    checkHeader() {
-        cy.get(element.attr.header)
-        .should('be.visible')
+
+    visitInventoryPage(){
+        cy.visit(element.route.inventory)
     }
 
-    checkProductLabel(){
+    checkHeader() {
+        cy.get(element.attr.header)
+            .should('be.visible')
+    }
+
+    checkProductLabel() {
         cy.get(element.attr.productLabel)
-        .should('be.visible')
-        .should('contain.text', 'Products')
+            .should('be.visible')
+            .should('contain.text', 'Products')
     }
 
     //fix: the element exists but is not visible to cypress
     checkBurguerMenu() {
         cy.get(element.attr.burguerMenu)
-        .should('exist')
+            .should('exist')
     }
 
-    checkAppLogo(){
+    checkAppLogo() {
         cy.get(element.attr.appLogo)
-        .should('be.visible')
-    }    
+            .should('be.visible')
+    }
 
     checkPeekIcon() {
         cy.get(element.attr.peekLogo)
-        .should('be.visible')
-        .and('have.prop', 'width')
-        .and('be.greaterThan', 0)
+            .should('be.visible')
+            .and('have.prop', 'width')
+            .and('be.greaterThan', 0)
     }
 
     checkProductsList() {
 
         cy.get(element.attr.productsList).each(($id, index, $list) => {
-        
+
             /* 
                 bug: duplicated class
                 when there is iteration using the similar command to the others, 
@@ -45,38 +49,38 @@ class ProductsPage {
                 .find(element.attr.inventoryImage)
                 .should('have.prop', 'naturalWidth')
                 .and('be.greaterThan', 0)
-                
+
             cy.wrap($id).find(element.attr.inventoryItemName).each(($name) => {
                 cy.wrap($name)
-                .should('be.visible')
-                .and('exist')
-                .and('not.be.empty')
+                    .should('be.visible')
+                    .and('exist')
+                    .and('not.be.empty')
             })
 
             cy.wrap($id).find('.inventory_item_desc').each(($description) => {
                 cy.wrap($description)
-                .should('be.visible')
-                .and('exist')
-                .and('not.be.empty')
+                    .should('be.visible')
+                    .and('exist')
+                    .and('not.be.empty')
             })
 
             cy.wrap($id).find('.inventory_item_price').each(($price) => {
                 cy.wrap($price)
-                .should('be.visible')
-                .and('exist')
-                .and('not.be.empty')
+                    .should('be.visible')
+                    .and('exist')
+                    .and('not.be.empty')
             })
 
         })
     }
 
-    addproductByIdToCart(productId, name) {
+    addProductByIdToCart(productId, name) {
         cy.get(`#item_${productId}_title_link`)
-        .should('contain.text', name)
-        .click()
+            .should('contain.text', name)
+            .click()
     }
 
-    checkAllHeaderElements(){
+    checkAllHeaderElements() {
         this.checkHeader()
         this.checkProductLabel()
         this.checkBurguerMenu()
