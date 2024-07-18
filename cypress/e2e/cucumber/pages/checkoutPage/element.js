@@ -1,4 +1,9 @@
 const element = {
+    
+    /*
+        fix: use a pattern to register ids;
+    */
+
     attr: {
         errorMessage:'[data-test="error"]',
         continueButton: '.btn_primary',
@@ -31,11 +36,11 @@ const element = {
         stepTwoURL: '/v1/checkout-step-two.html',
         checkoutComplete: 'v1/checkout-complete.html',
     },
+
     message: {
         errorFirstName: 'Error: First Name is required',
         errorLastName: 'Error: Last Name is required',
         errorZipCode: 'Error: Postal Code is required',
-
     },
     
 }

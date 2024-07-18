@@ -1,28 +1,25 @@
 import {Given, When, Then, And} from 'cypress-cucumber-preprocessor/steps'
 import loginPage from '../../pages/loginPage/LoginPage.cy'
-import productsPage from '../../pages/productsPage/ProductsPage.cy'
+import products from '../../pages/productsPage/ProductsPage.cy'
 
+/* 
+    login with valid data
+    If a user with a problem is added, the tests should fail
+*/
 Given('I login with a valid username and password', () => {
     loginPage.login(
         `${Cypress.env('USERNAME')}`,
         `${Cypress.env('PASSWORD')}`
     )
-    cy.visit('/inventory.html')
+    products.visitInventoryPage()
 })
 
-When('access the product page', () => {
-    productsPage.checkAllHeaderElements()
+//checks if the product listing page loaded correctly
+When('I access the products page', () => {
+    products.checkAllHeaderElements()
 })
 
-When('choose product by name', () => {
-    productsPage.addproductByIdToCart(4, 'Sauce Labs Backpack')
-})
-
-
-Then('the products list is displayed with image, name, price and description', ()=> {
-    productsPage.checkProductsList()
-})
-
-Then('click in add to cart', () => {
-    productsPage.clickAddToCartButton()
+//checks if the product listing is displayed correctly
+Then('the products list should be displayed with an image, name, price, and description for each product', ()=> {
+    products.checkProductsList()
 })

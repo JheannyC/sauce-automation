@@ -1,110 +1,113 @@
-import element from "./element"
+import element from './element'
 
-class CheckoutPage{
+class CheckoutPage {
 
-    checkStepOneURL(){
-        cy.url().should('include', element.route.stepOneURL)
-    }
-    checkStepTwoURL(){
-        cy.url().should('include', element.route.stepTwoURL)
-    }
-    checkoutCompleteURL(){
-        cy.url().should('include', element.route.checkoutComplete)
+    checkStepOneURL() {
+        cy.url()
+            .should('include', element.route.stepOneURL)
     }
 
-    clickContinueButton(){
+    checkStepTwoURL() {
+        cy.url()
+            .should('include', element.route.stepTwoURL)
+    }
+
+    checkoutCompleteURL() {
+        cy.url()
+            .should('include', element.route.checkoutComplete)
+    }
+
+    clickContinueButton() {
         cy.get(element.attr.continueButton)
-        .should('have.value', element.label.continue)
-        .click()
+            .should('have.value', element.label.continue)
+            .click()
     }
 
-    inputFirstName(name){
+    inputFirstName(name) {
         cy.get(element.attr.firstName)
-        .should('have.attr', 'placeholder', element.placeholder.firstName)
-        .type(name)
+            .should('have.attr', 'placeholder', element.placeholder.firstName)
+            .type(name)
     }
 
-    inputLastName(lastName){
+    inputLastName(lastName) {
         cy.get(element.attr.lastName)
-        .should('have.attr', 'placeholder', element.placeholder.lastName)
-        .type(lastName)
+            .should('have.attr', 'placeholder', element.placeholder.lastName)
+            .type(lastName)
     }
 
-    inputZipCode(zipCode){
+    inputZipCode(zipCode) {
         cy.get(element.attr.zipCode)
-        .should('have.attr', 'placeholder', element.placeholder.zipCode)
-        .type(zipCode)
-        
+            .should('have.attr', 'placeholder', element.placeholder.zipCode)
+            .type(zipCode)
+
     }
-    clickFinishButton(){
+
+    clickFinishButton() {
         cy.get(element.attr.finishButton)
-        .should('contain.text', element.label.finish)
-        .click()
+            .should('contain.text', element.label.finish)
+            .click()
     }
 
-    firstNameError(){
+    firstNameError() {
         cy.get(element.attr.errorMessage)
-        .should('contain.text', element.message.errorFirstName)
-    }
-    lastNameError(){
-        cy.get(element.attr.errorMessage)
-        .should('contain.text', element.message.errorLastName)
+            .should('contain.text', element.message.errorFirstName)
     }
 
-    zipCodeError(){
+    lastNameError() {
         cy.get(element.attr.errorMessage)
-        .should('contain.text', element.message.errorZipCode)
+            .should('contain.text', element.message.errorLastName)
     }
 
-    checkoutPayment(){
+    zipCodeError() {
+        cy.get(element.attr.errorMessage)
+            .should('contain.text', element.message.errorZipCode)
+    }
+
+    checkoutPayment() {
         cy.get(element.attr.summaryInfo).each(($id, index, $list) => {
-        
-            cy.wrap($id)
-            .should('be.visible')
-            .and('exist')
-            .and('not.be.empty')
 
             cy.wrap($id)
-            .should('be.visible')
-            .and('exist')
-            .and('not.be.empty')
+                .should('be.visible')
+                .and('exist')
+                .and('not.be.empty')
+
+            cy.wrap($id)
+                .should('be.visible')
+                .and('exist')
+                .and('not.be.empty')
         })
 
         cy.get(element.attr.itemTotal)
-        .should('be.visible')
-        .and('exist')
-        .and('not.be.empty')
+            .should('be.visible')
+            .and('exist')
+            .and('not.be.empty')
 
         cy.get(element.attr.tax)
-        .should('be.visible')
-        .and('exist')
-        .and('not.be.empty')
+            .should('be.visible')
+            .and('exist')
+            .and('not.be.empty')
 
         cy.get(element.attr.total)
-        .should('be.visible')
-        .and('exist')
-        .and('not.be.empty')
+            .should('be.visible')
+            .and('exist')
+            .and('not.be.empty')
     }
 
-    checkMessage(){
+    checkThanksScreen() {
         cy.get(element.attr.checkoutCompleteTitle)
-        .should('be.visible')
-        .and('exist')
-        .and('not.be.empty')
+            .should('be.visible')
+            .and('exist')
+            .and('not.be.empty')
 
         cy.get(element.attr.checkoutCompletSubTitle)
-        .should('be.visible')
-        .and('exist')
-        .and('not.be.empty')
+            .should('be.visible')
+            .and('exist')
+            .and('not.be.empty')
 
         cy.get(element.attr.checkoutCompleteImg)
-        .should('have.prop', 'naturalWidth')
-        .and('be.greaterThan', 0)
-
+            .should('have.prop', 'naturalWidth')
+            .and('be.greaterThan', 0)
     }
-    
-    
-
 
 }
 export default new CheckoutPage()

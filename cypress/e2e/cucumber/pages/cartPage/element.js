@@ -1,6 +1,6 @@
 const element = {
+    
     attr: {
-
         cartLabel: '.subheader',
         backButton:'.inventory_details_back_button',
         addToCart: '.btn_primary',
@@ -18,7 +18,7 @@ const element = {
     },
 
     route: {
-        cartUrl: '/v1/cart.html'
+        cartUrl: '/cart.html'
     },
 
 }

@@ -4,85 +4,90 @@ import product from '../../pages/productsPage/ProductsPage.cy';
 import cart from '../../pages/cartPage/CartPage.cy';
 import checkout from '../../pages/checkoutPage/CheckoutPage.cy';
 
-
+// login and check if the user was redirected to the product page
 Before(()=>{
-
     login.login(
         `${Cypress.env('USERNAME')}`,
         `${Cypress.env('PASSWORD')}`
     )
-    cy.visit('/inventory.html')
+    product.visitInventoryPage()
 })
 
-Given('I want to add a product to the cart', (datatable) => {
+// select a product
+Given('I choose a product', (datatable) => {
     datatable.hashes().forEach((element) => {
-        product.addproductByIdToCart(
+        product.addProductByIdToCart(
            element.productId,
            element.name
         )
     })
-   
 })
-And('add product to cart', ()=> {
+
+// add a product to the cart and go to the checkout page
+And('I go to the checkout screen after adding the product to the cart', ()=> {
     cart.addProductToCart()
     cart.clickCartButton()
     cart.clickCheckoutButton()
     checkout.checkStepOneURL()
 })
 
-
-   
-
-And('entered my name', ()=> {
-    checkout.inputFirstName('joaquina')
+// insert name
+And('I enter my first name {string}', (name)=> {
+    checkout.inputFirstName(name)
 })
 
-And('entered my last name', ()=> {
-    checkout.inputLastName('francisca')
+// insert last name
+And('I enter my last name {string}', (lastName)=> {
+    checkout.inputLastName(lastName)
 })
 
-And('entered my zip code', ()=> {
-    checkout.inputZipCode('223')
+// insert zip code
+And('I enter my zip code {string}', (zipCode)=> {
+    checkout.inputZipCode(zipCode)
 })
 
-When('click on the continue button', ()=> {
+// click the continue button
+When('I click on the continue button', ()=> {
     checkout.clickContinueButton()
 })
 
-And('I see an error message from the name field', ()=> {
+// checks error message if name field is empty
+And('I should see an error message for the first name field', ()=> {
     checkout.firstNameError()
 })
 
-And('I see an error message from the last name field', ()=> {
+// checks error message if last name field is empty
+And('I should see an error message for the last name field', ()=> {
     checkout.lastNameError()
 })
-And('I see an error message from the zip code field', ()=> {
+
+// checks error message if zip code field is empty
+And('I should see an error message for the zip code field', ()=> {
     checkout.zipCodeError()
 })
 
-And('filled in the data correctly', ()=> {
-    checkout.inputFirstName('dsfasd')
-    checkout.inputLastName('fdssad')
-    checkout.inputZipCode('6656')
-})
-
-And('check selected products', ()=> {
+// checks selected products in the checkout list
+And('I check the selected products', ()=> {
     cart.checkCartProducts()
 })
 
-And ('check payment method', ()=> {
+// check payment details
+And ('I check the payment method', ()=> {
     checkout.checkoutPayment()
 })
 
-And ('click in finish button', ()=> {
+// click the checkout button
+And ('I click on the finish button', ()=> {
     checkout.clickFinishButton()
 })
 
-Then('I will be directed to the second part of the checkout', ()=> {
+// checks whether the user was correctly redirected to the order check
+Then('I should be directed to the second part of the checkout', ()=> {
     checkout.checkStepTwoURL()
 })
 
-Then('I am redirected to the thank you screen', ()=> {
+// checks if the user was correctly redirected to the thank you page
+Then('I should be redirected to the thank you screen', ()=> {
     checkout.checkoutCompleteURL()
-    checkout.checkMessage()
+    checkout.checkThanksScreen()
 })

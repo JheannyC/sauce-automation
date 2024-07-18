@@ -1,4 +1,9 @@
 const element = {
+
+    /*
+        fix: use a pattern to register ids;
+    */
+
     attr:{
         username: '[data-test="username"]',
         password: '[data-test="password"]',
@@ -20,7 +25,7 @@ const element = {
     },
 
     route: {
-        loggedUser: '/v1/inventory.html',
+        inventory: '/inventory.html',
     },
 }
 

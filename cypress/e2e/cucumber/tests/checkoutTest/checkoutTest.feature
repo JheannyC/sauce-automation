@@ -1,58 +1,60 @@
 Feature: Checkout page
 
-Scenario: checkout with empty name field
-    Given I want to add a product to the cart
+Scenario: Checkout with an empty first name field
+    Given I choose a product
         | productId |           name       |
         |   4       | Sauce Labs Backpack  |
-    And add product to cart
-    When click on the continue button
-    Then I see an error message from the name field
+    And I go to the checkout screen after adding the product to the cart
+    When I click on the continue button
+    Then I should see an error message for the first name field
 
 Scenario: checkout with empty last name field
-    Given I want to add a product to the cart
+    Given I choose a product
         | productId |           name       |
         |   4       | Sauce Labs Backpack  |
-    And add product to cart
-    When click on the continue button
-    And entered my name
-    When click on the continue button
-    Then I see an error message from the last name field
+    And I go to the checkout screen after adding the product to the cart
+    When I click on the continue button
+    And I enter my first name "Joana"
+    When I click on the continue button
+    Then I should see an error message for the last name field
 
 Scenario: checkout with empty zip code field
-    Given I want to add a product to the cart
+    Given I choose a product
         | productId |           name       |
         |   4       | Sauce Labs Backpack  |
-    And add product to cart
-    When click on the continue button
-    And entered my name
-    And entered my last name
-    When click on the continue button
-    Then I see an error message from the zip code field
-
+    And I go to the checkout screen after adding the product to the cart
+    When I click on the continue button
+    And I enter my first name "Josefina"
+    And I enter my last name "Tadeu"
+    When I click on the continue button
+    Then I should see an error message for the zip code field
+    
 Scenario: filling in correct data
-    Given I want to add a product to the cart
+    Given I choose a product
         | productId |           name       |
         |   4       | Sauce Labs Backpack  |
-    And add product to cart
-    When click on the continue button
-    And entered my name
-    And entered my last name
-    And entered my zip code
-    When click on the continue button
-    Then I will be directed to the second part of the checkout
+    And I go to the checkout screen after adding the product to the cart
+    When I click on the continue button
+    And I enter my first name "Maria"
+    And I enter my last name "Cordeiro"
+    And I enter my zip code "5555-555"
+    When I click on the continue button
+    Then I should be directed to the second part of the checkout
 
 Scenario: filling in correct data and completing the purchase
-    Given I want to add a product to the cart
+    Given I choose a product
         | productId |           name       |
         |   4       | Sauce Labs Backpack  |
-    And add product to cart
-    When click on the continue button
-    And filled in the data correctly
-    When click on the continue button
-    And check selected products
-    And check payment method
-    And click in finish button
-    Then I am redirected to the thank you screen
+    And I go to the checkout screen after adding the product to the cart
+    When I click on the continue button
+    And I enter my first name "Donald"
+    And I enter my last name "McDonald"
+    And I enter my zip code "7777-777"
+    When I click on the continue button
+    And I check the selected products
+    And I check the payment method
+    And I click on the finish button
+    Then I should be redirected to the thank you screen
     
 
 
